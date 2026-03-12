@@ -44,15 +44,79 @@ API desarrollada utilizando Django REST Framework y PostgreSQL
         
 4. Base URL : http://localhost:8000 
 
-### Render
+### Render, con listados de ejemplos de body JSON
 
 - Dirigir peticiones a la URL: https://pruebatecnica-dxsn.onrender.com
-*   Ejemplo: 
-        https://pruebatecnica-dxsn.onrender.com/health/
+-   Estatus: https://pruebatecnica-dxsn.onrender.com/health/
+
+- POST https://pruebatecnica-dxsn.onrender.com/signup/ 
+  ```c
+  {
+    "username": "matiastest",
+    "email": "matiastest@gmail.com",
+    "password": "Contra1234",
+    "confirm_password": "Contra1234"
+  }
+  ```
+
+- POST https://pruebatecnica-dxsn.onrender.com/signin/ 
+  ```c
+  {
+    "username": "matiastest",
+    "password": "Contra1234"
+  }
+  La respuesta de esta petición entregará dos valores,"refresh"
+   y "access", el valor de access corresponde al token de 
+  acceso necesario para autenticar las siguientes peticiones. 
+  Por ejemplo, dentro de Postman, el valor "access" debe ser ubicado 
+  dentro de la variable de entorno "Bearer Token", esto 
+  automatizará el token para todas las peticiones de la 
+  colección que lo requieran.
+  ```
+- POST https://pruebatecnica-dxsn.onrender.com/tasks/ 
+  ```c
+  {
+    "task_title": "Test backend",
+    "task_description": "Terminar backend Wizz",
+    "task_status": "pending",
+    "task_due_date": "2026-03-16T18:00:00Z"
+  }
+  ```
+- GET https://pruebatecnica-dxsn.onrender.com/tasks/ 
+  ```c
+  Obtiene las tareas creadas por el usuario autenticado
+  ```
+- GET https://pruebatecnica-dxsn.onrender.com/tasks/?task_status=pending
+  ```c
+    Entrega las tareas en estado pendiente
+  ```
+- GET https://pruebatecnica-dxsn.onrender.com/tasks/?ordering=-task_created_at
+  ```c
+    Ordena tareas por fecha de creación
+  ```
+- GET https://pruebatecnica-dxsn.onrender.com/tasks/?page=1&page_size=1
+  ```c
+    Entrega tareas con paginación dependiendo del page_size
+  ```
+- GET https://pruebatecnica-dxsn.onrender.com/tasks/1/
+  ```c
+  Entrega la tarea con id=1, el usuario debe ser dueño de la tarea 
+  para poder verlas
+  ```
 
 
+- UPDATE https://pruebatecnica-dxsn.onrender.com/tasks/1/
+  ```c
+  Modifica campo de la tarea
+  {
+    "task_status": "completed"
+  }
+  ```
 
-
+- DELETE https://pruebatecnica-dxsn.onrender.com/tasks/1/
+  ```c
+  Elimina una tarea
+  ```
 ## Dudas y consultas
 
 matias.herrerac@sansano.usm.cl
