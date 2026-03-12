@@ -105,7 +105,7 @@ API desarrollada utilizando Django REST Framework y PostgreSQL
   ```
 
 
-- UPDATE https://pruebatecnica-dxsn.onrender.com/tasks/1/
+- PATCH https://pruebatecnica-dxsn.onrender.com/tasks/1/
   ```c
   Modifica campo de la tarea
   {
